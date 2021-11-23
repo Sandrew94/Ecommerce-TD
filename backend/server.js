@@ -5,9 +5,13 @@ import colors from "colors"
 import connectDB from "./config/db.js"
 
 import productRoutes from "./routes/productRoutes.js"
+import userRoutes from "./routes/userRoutes.js"
 
 
 const app = express()
+
+// to access json requests in the body
+app.use(express.json())
 
 dotenv.config()
 
@@ -18,8 +22,9 @@ res.send("api is coming up")
 })
 
 
-
 app.use("/api/products", productRoutes)
+app.use("/api/users", userRoutes)
+
 
 const PORT = process.env.PORT || 5000
 
