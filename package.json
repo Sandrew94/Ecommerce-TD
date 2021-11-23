@@ -8,7 +8,9 @@
     "start": "node backend/server",
     "server": "nodemon backend/server",
     "client": "npm start --prefix frontend",
-    "dev": "concurrently \"npm run server\" \"npm run client\" "
+    "dev": "concurrently \"npm run server\" \"npm run client\" ",
+    "seeder:import": "node backend/seeder",
+    "seeder:delete": "node backend/seeder -d"
   },
   "repository": {
     "type": "git",
@@ -25,9 +27,11 @@
   },
   "homepage": "https://github.com/Sandrew94/Ecommerce-TD#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "express-async-handler": "^1.2.0",
     "mongoose": "^6.0.12",
     "nodemon": "^2.0.15"
   },
