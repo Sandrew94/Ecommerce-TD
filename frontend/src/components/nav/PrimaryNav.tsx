@@ -1,5 +1,5 @@
 import * as React from "react";
-import { NavLink } from "react-router-dom";
+import NavLinkComponents from "./NavLinkComponents";
 import {
   EmailPhoneContainer,
   LoginCartLangContainer,
@@ -8,7 +8,6 @@ import {
 } from "../../styles/pages-style/Nav.style";
 import SpanContainer from "../smallComponents/SpanContainer";
 import Mailto from "../smallComponents/Mailto";
-import { isActiveClass } from "../../utils/isActiveClass";
 
 const PrimaryNav: React.FunctionComponent = () => {
   return (
@@ -26,30 +25,15 @@ const PrimaryNav: React.FunctionComponent = () => {
       <LoginCartLangContainer>
         <span>English</span>
         <span>USD</span>
-        <NavLink
-          to="/login"
-          style={({ isActive }) =>
-            isActiveClass({ isActive, color: "#F1F1F1" })
-          }
-        >
+        <NavLinkComponents to="/login" color="F1F1F1">
           <SpanContainer>Login</SpanContainer>
-        </NavLink>
-        <NavLink
-          to="/wishlist"
-          style={({ isActive }) =>
-            isActiveClass({ isActive, color: "#F1F1F1" })
-          }
-        >
+        </NavLinkComponents>
+        <NavLinkComponents to="/wishlist" color="F1F1F1">
           <SpanContainer>Wishlist</SpanContainer>
-        </NavLink>
-        <NavLink
-          to="/cart"
-          style={({ isActive }) =>
-            isActiveClass({ isActive, color: "#F1F1F1" })
-          }
-        >
+        </NavLinkComponents>
+        <NavLinkComponents to="/cart" color="F1F1F1">
           <SpanContainer>Cart</SpanContainer>
-        </NavLink>
+        </NavLinkComponents>
       </LoginCartLangContainer>
     </Wrapper>
   );
