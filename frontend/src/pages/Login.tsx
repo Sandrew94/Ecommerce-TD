@@ -1,9 +1,10 @@
 import * as React from "react";
+import LoginComp from "../components/Login/LoginComp";
 
 interface ILoginProps {}
 
 const Login: React.FunctionComponent<ILoginProps> = (props) => {
-  return <h1>login</h1>;
+  return <LoginComp />;
 };
 
 export default Login;
