@@ -1,6 +1,8 @@
 import { expect } from "chai"
 import superagent from "superagent"
-
+import path from "path"
+import dotenv from "dotenv" 
+dotenv.config({ path: '../../.env'});
 
 const testRoute = (describeOne, route) =>{
     describe(describeOne, () =>{
@@ -26,12 +28,11 @@ const testMethod = (describeOne, route, method,) =>{
      })
      
 }
-let testOne = testRoute("Return status", "http://localhost:5000/")
-let testTwo = testRoute("Return status", "http://localhost:5000/api/products")
-let testThree = testMethod("Return status", "http://localhost:5000/api/products", "get")
-let testFour = testMethod("Return status", "http://localhost:5000/", "get")
+let testOne = testRoute("Return status", `http://localhost:${process.env.PORT}/`)
+let testTwo = testRoute("Return status", `http://localhost:${process.env.PORT}/api/products`)
+let testThree = testMethod("Return status", `http://localhost:${process.env.PORT}/api/products`, "get")
+let testFour = testMethod("Return status", `http://localhost:${process.env.PORT}/`, "get")
 
-
-
+console.log(process.env.PORT)
 
 
