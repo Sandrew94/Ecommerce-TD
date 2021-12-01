@@ -9,11 +9,21 @@ import Contact from "./pages/Contact";
 import Homepage from "./pages/Homepage";
 import Layout from "./components/layout/Layout";
 import Admin from "./pages/Admin";
-import { GlobalStyle } from "./styles/Global.style";
+import { GlobalStyle } from "./styles-global/Global.style";
 import Cart from "./pages/Cart";
 import Wishlist from "./pages/Wishlist";
+import { useDispatch } from "react-redux";
+import { isLogged } from "./store/actions/loginAction";
+import React from "react";
 
 function App() {
+  //Check if the user is already logged in
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(isLogged());
+  });
+
   return (
     <div className="App">
       <BrowserRouter>

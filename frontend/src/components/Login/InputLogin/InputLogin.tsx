@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import {
   ButtonStyle,
@@ -15,26 +15,29 @@ import {
 import axios from "axios";
 import { LoadingWrapper, LsdRingDiv } from "../../Spinner/Spinner.style";
 import { setLogin } from "../../../store/actions/loginAction";
+import { logoutTimer } from "../../../store/actions/logoutTimer";
 
-interface IInputLoginProps {}
+interface IInputLoginProps {
+  isLogin: boolean;
+  switchAuthModeHandler: () => void;
+}
 
 interface IInputLoginFormValues {
   email: string;
   password: string;
 }
 
-const InputLogin: React.FunctionComponent<IInputLoginProps> = (props) => {
+const InputLogin: React.FunctionComponent<IInputLoginProps> = ({
+  isLogin,
+  switchAuthModeHandler,
+}) => {
   const navigate = useNavigate();
   const initialValues: IInputLoginFormValues = {
     email: "",
     password: "",
   };
 
-  //State from redux
-  const { token } = useSelector((state: any) => state.login);
-  console.log(token);
   const dispatch = useDispatch();
-
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: Yup.object({
@@ -49,13 +52,20 @@ const InputLogin: React.FunctionComponent<IInputLoginProps> = (props) => {
     onSubmit: async (values: IInputLoginFormValues, { setSubmitting }) => {
       setSubmitting(true);
 
-      try {
-        setSubmitting(false);
+      let url;
+      if (isLogin) {
+        url =
+          "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAGDYoTB7sH5SFDmEAu7WgioOxnbEtI-F0";
+      } else {
+        url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAGDYoTB7sH5SFDmEAu7WgioOxnbEtI-F0`;
+      }
 
-        const { data } = await axios.post("url", values);
+      try {
+        const { data } = await axios.post(url, values);
         console.log(data);
 
-        dispatch(setLogin("TEST TOKEN")); //Import token to redux
+        dispatch(setLogin(data.idToken)); //Import token to redux
+        dispatch(logoutTimer(6000000));
 
         navigate("/"); //Redirect to Homepage
       } catch (err) {
@@ -66,9 +76,6 @@ const InputLogin: React.FunctionComponent<IInputLoginProps> = (props) => {
       setSubmitting(false);
     },
   });
-
-  // console.log(formik.isSubmitting);
-  // console.log(formik);
 
   return (
     <>
@@ -104,12 +111,16 @@ const InputLogin: React.FunctionComponent<IInputLoginProps> = (props) => {
           </LoadingWrapper>
         )}
         {!formik.isSubmitting && (
-          <ButtonStyle type="submit">Sign In</ButtonStyle>
+          <ButtonStyle type="submit">
+            {isLogin ? "Login" : "Sign Up"}
+          </ButtonStyle>
         )}
         {formik.status && <InputError>{formik.status}</InputError>}
       </FormStyle>
-      <CreateAccountTextStyle>
-        Don't have an Account? Create account
+      <CreateAccountTextStyle onClick={switchAuthModeHandler}>
+        {isLogin
+          ? "Don't have an Account? Create account"
+          : "Already have an Account? Login"}
       </CreateAccountTextStyle>
     </>
   );

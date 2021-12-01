@@ -13,12 +13,25 @@ import InputLogin from "./InputLogin/InputLogin";
 interface ILoginProps {}
 
 const LoginComp: React.FunctionComponent<ILoginProps> = (props) => {
+  const [isLogin, setIsLogin] = React.useState(true);
+
+  const switchAuthModeHandler = () => {
+    //Switch between login and register
+    setIsLogin((prevState) => !prevState);
+  };
   return (
     <Wrapper>
       <WrapperLogin>
-        <LoginTitle>Login</LoginTitle>
-        <LoginDesc>Please login using account detail below.</LoginDesc>
-        <InputLogin />
+        <LoginTitle> {isLogin ? "Login" : "Sign Up"}</LoginTitle>
+        <LoginDesc>
+          {isLogin
+            ? "Please login using account detail below."
+            : "Please sign up using account detail below."}
+        </LoginDesc>
+        <InputLogin
+          isLogin={isLogin}
+          switchAuthModeHandler={switchAuthModeHandler}
+        />
       </WrapperLogin>
       <ImgLogo src={loginLogo} alt="LoginLogo" />
     </Wrapper>

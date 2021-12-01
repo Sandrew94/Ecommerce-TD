@@ -1,19 +1,40 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type initialStateType = { token: string; isLoggedIn: boolean };
-const initialState: initialStateType = { token: "", isLoggedIn: false };
+type initialStateType = { token: string | null; isLoggedIn: boolean };
+const initialState: initialStateType = {
+  token: localStorage.getItem("token") || "",
+  isLoggedIn: false,
+};
 
 export const loginSlice = createSlice({
   name: "loginSlice",
   initialState,
   reducers: {
     setLogin: (state, action: PayloadAction<string>) => {
-      state.token = action.payload; // action.payload is the token
-      state.isLoggedIn = !!state.token; // !!state.token is a confirm that the token is not empty and return true
+      const storedToken = state.token;
+      if (!storedToken) {
+        state.token = action.payload;
+        state.isLoggedIn = !!state.token;
+        localStorage.setItem("token", JSON.stringify(action.payload));
+      } else {
+        state.token = storedToken;
+        state.isLoggedIn = true;
+      }
+    },
+    isLogged: (state) => {
+      if (state.isLoggedIn) return;
+      const storedToken = localStorage.getItem("token") || "";
+      if (storedToken) {
+        state.isLoggedIn = true;
+      }
+      if (storedToken === "") {
+        state.isLoggedIn = false;
+      }
     },
     logout: (state) => {
       state.token = "";
       state.isLoggedIn = false;
+      localStorage.removeItem("token");
     },
   },
 });
