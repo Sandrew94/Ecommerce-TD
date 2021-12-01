@@ -55,4 +55,9 @@ export const CreateAccountTextStyle = styled.span`
   font-weight: 400;
   line-height: 2rem;
   color: #9096b2;
+  cursor: pointer;
+
+  :hover {
+    color: #fb2e86;
+  }
 `;

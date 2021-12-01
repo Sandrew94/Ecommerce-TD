@@ -5,11 +5,20 @@ import {
   LoginCartLangContainer,
   PhoneWrapper,
   Wrapper,
-} from "../../styles/pages-style/Nav.style";
-import SpanContainer from "../smallComponents/SpanContainer";
+} from "./style/Nav.style";
 import Mailto from "../smallComponents/Mailto";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../store/actions/loginAction";
+import { SpanWrapper } from "./style/SpanStyle.style";
 
 const PrimaryNav: React.FunctionComponent = () => {
+  const dispatch = useDispatch();
+  const { isLoggedIn } = useSelector((state: any) => state.login);
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
   return (
     <Wrapper>
       <EmailPhoneContainer>
@@ -26,13 +35,15 @@ const PrimaryNav: React.FunctionComponent = () => {
         <span>English</span>
         <span>USD</span>
         <NavLinkComponents to="/login" color="F1F1F1">
-          <SpanContainer>Login</SpanContainer>
+          <SpanWrapper onClick={handleLogout}>
+            {!isLoggedIn ? "Login" : "Logout"}
+          </SpanWrapper>
         </NavLinkComponents>
         <NavLinkComponents to="/wishlist" color="F1F1F1">
-          <SpanContainer>Wishlist</SpanContainer>
+          <SpanWrapper>Wishlist</SpanWrapper>
         </NavLinkComponents>
         <NavLinkComponents to="/cart" color="F1F1F1">
-          <SpanContainer>Cart</SpanContainer>
+          <SpanWrapper>Cart</SpanWrapper>
         </NavLinkComponents>
       </LoginCartLangContainer>
     </Wrapper>

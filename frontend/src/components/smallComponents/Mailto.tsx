@@ -1,5 +1,5 @@
 import * as React from "react";
-import { LinkStyleA } from "../../styles/smallComponents/Mailto.style";
+import { LinkStyleA } from "./style/Mailto.style";
 
 interface IMailToProps {
   email: string;

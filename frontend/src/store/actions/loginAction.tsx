@@ -1,3 +1,3 @@
 import { loginSlice } from "../reducer/loginReducer";
 
-export const { setLogin } = loginSlice.actions;
+export const { setLogin, isLogged, logout } = loginSlice.actions;

@@ -1,9 +1,7 @@
-import * as React from "react";
+import HomepageComp from "../components/Homepage/HomepageComp";
 
-interface IHomepageProps {}
-
-const Homepage: React.FunctionComponent<IHomepageProps> = (props) => {
-  return <h1>Homepage</h1>;
+const Homepage: React.FunctionComponent = () => {
+  return <HomepageComp />;
 };
 
 export default Homepage;
