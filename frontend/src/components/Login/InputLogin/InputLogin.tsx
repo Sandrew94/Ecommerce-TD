@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import {
-  ButtonStyle,
   CreateAccountTextStyle,
   ForgotPasswordStyle,
   FormStyle,
@@ -16,6 +15,7 @@ import axios from "axios";
 import { LoadingWrapper, LsdRingDiv } from "../../Spinner/Spinner.style";
 import { setLogin } from "../../../store/actions/loginAction";
 import { logoutTimer } from "../../../store/actions/logoutTimer";
+import { ButtonStyle } from "../../../styles-global/button";
 
 interface IInputLoginProps {
   isLogin: boolean;
@@ -47,7 +47,7 @@ const InputLogin: React.FunctionComponent<IInputLoginProps> = ({
         .max(20, "Must be 20 characters or less"),
       password: Yup.string()
         .required("Required a valid password")
-        .min(1, "Must be max 6 characters or less"), //1 for test final value is 6
+        .min(6, "Must be max 6 characters or less"),
     }),
     onSubmit: async (values: IInputLoginFormValues, { setSubmitting }) => {
       setSubmitting(true);
@@ -110,7 +110,7 @@ const InputLogin: React.FunctionComponent<IInputLoginProps> = ({
           </LoadingWrapper>
         )}
         {!formik.isSubmitting && (
-          <ButtonStyle type="submit">
+          <ButtonStyle type="submit" isActivePadding>
             {isLogin ? "Login" : "Sign Up"}
           </ButtonStyle>
         )}
