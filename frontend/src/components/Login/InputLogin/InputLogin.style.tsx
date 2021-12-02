@@ -38,16 +38,6 @@ export const ForgotPasswordStyle = styled.div`
   text-align: left;
 `;
 
-export const ButtonStyle = styled.button`
-  background: #fb2e86;
-  border-radius: 3px;
-  padding: 1rem 16.5rem;
-  color: #fff;
-  border: none;
-  margin: 2rem 0;
-  cursor: pointer;
-`;
-
 export const CreateAccountTextStyle = styled.span`
   padding-top: 1rem;
   font-size: 1.7rem;

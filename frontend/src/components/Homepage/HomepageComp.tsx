@@ -1,9 +1,15 @@
 import * as React from "react";
+import SliderSlideshow from "./Slider/SliderSlideshow";
 
 interface IHomepageCompProps {}
 
 const HomepageComp: React.FunctionComponent<IHomepageCompProps> = (props) => {
-  return <h1>Homepage</h1>;
+  return (
+    <>
+      <SliderSlideshow />
+      Products comp
+    </>
+  );
 };
 
 export default HomepageComp;
