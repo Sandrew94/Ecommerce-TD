@@ -47,24 +47,23 @@ const InputLogin: React.FunctionComponent<IInputLoginProps> = ({
         .max(20, "Must be 20 characters or less"),
       password: Yup.string()
         .required("Required a valid password")
-        .min(6, "Must be max 6 characters or less"),
+        .min(1, "Must be max 6 characters or less"), //1 for test final value is 6
     }),
     onSubmit: async (values: IInputLoginFormValues, { setSubmitting }) => {
       setSubmitting(true);
 
       let url;
       if (isLogin) {
-        url =
-          "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAGDYoTB7sH5SFDmEAu7WgioOxnbEtI-F0";
+        url = "http://localhost:5000/api/users/login";
       } else {
-        url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAGDYoTB7sH5SFDmEAu7WgioOxnbEtI-F0`;
+        url = `http://localhost:5000/api/users/register`;
       }
 
       try {
         const { data } = await axios.post(url, values);
         console.log(data);
 
-        dispatch(setLogin(data.idToken)); //Import token to redux
+        dispatch(setLogin(data.token)); //Import token to redux
         dispatch(logoutTimer(6000000));
 
         navigate("/"); //Redirect to Homepage
