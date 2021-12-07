@@ -11,6 +11,7 @@ import {
   WrapperSingleItem,
   WrapperTextProduct,
 } from "../../style/Items.style";
+import { useNavigate } from "react-router-dom";
 
 import IconsCarts from "./IconsCart";
 
@@ -19,13 +20,24 @@ interface IItemsProps {
 }
 
 const Items: React.FunctionComponent<IItemsProps> = ({ products }) => {
-  const itemUI = products.map((item: SingleProductsType, idx: number) => {
+  const navigate = useNavigate();
+
+  const handleRedirectSingleProduct = (_id: string): void => {
+    navigate(`/products/${_id}`);
+  };
+
+  const itemUI = products.map((item: SingleProductsType) => {
     const { name, price, _id } = item;
 
     return (
       <WrapperSingleItem key={uuidv4()} id={_id}>
         <IconsCarts />
-        <ImgProduct src={mouse} alt={name} />
+
+        <ImgProduct
+          src={mouse}
+          alt={name}
+          onClick={() => handleRedirectSingleProduct(_id)}
+        />
         <WrapperTextProduct>
           <TextName>{name}</TextName>
           <div>
