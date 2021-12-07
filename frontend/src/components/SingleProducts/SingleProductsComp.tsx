@@ -7,7 +7,12 @@ const SingleProductsComp: React.FunctionComponent<ISingleProductsCompProps> = (
   props
 ) => {
   const { id } = useParams();
-  return <h1>{id}</h1>;
+  return (
+    <>
+      <h1>Product Details</h1>
+      <h1>{id}</h1>
+    </>
+  );
 };
 
 export default SingleProductsComp;
