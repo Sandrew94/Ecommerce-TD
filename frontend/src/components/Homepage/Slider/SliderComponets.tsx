@@ -35,8 +35,8 @@ const SliderComponents: React.FunctionComponent<ISliderComponentsProps> = ({
         <ImgLeft src={lamp} alt="lamp" />
       </WrapperLeftImg>
       <Text>
-        <RedText>Best Furniture For Your Castle....</RedText>
-        <TitleText>New Furniture Collection Trends in 2021</TitleText>
+        <RedText>Best Forniture For Your Castle....</RedText>
+        <TitleText>New Forniture Collection Trends in 2021</TitleText>
         <DescriptionText>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est
           adipiscing in phasellus non in justo.
