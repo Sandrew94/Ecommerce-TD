@@ -3,17 +3,23 @@ import {
   CartTitle,
   ContainerCartTotals,
   ContainerDivider,
+  TitleSections,
   Wrapper,
 } from "./style/CartComp.style";
 import CartItem from "./CartItem";
 import { useSelector } from "react-redux";
+import { getTotalAmount } from "../../store/reducer/cartSlice";
+import { RootState } from "../../store";
 
 interface ICartCompProps {}
 
 const CartComp: React.FunctionComponent<ICartCompProps> = (props) => {
-  const { items, totalAmount, totalQuantity } = useSelector(
-    (state: any) => state.cart
+  const { items, totalQuantity } = useSelector(
+    (state: RootState) => state.cart
   );
+
+  const totalItemPrice = useSelector(getTotalAmount);
+  // console.log(totalItemPrice, "data");
 
   const cartData = items.map((item: any) => {
     const { _id } = item;
@@ -24,16 +30,16 @@ const CartComp: React.FunctionComponent<ICartCompProps> = (props) => {
     <Wrapper>
       <ContainerDivider>
         <CartTitle>
-          <h1>Product</h1>
-          <h1>Price</h1>
-          <h1>Quantity</h1>
-          <h1>Total</h1>
+          <TitleSections>Product</TitleSections>
+          <TitleSections>Price</TitleSections>
+          <TitleSections>Quantity</TitleSections>
+          <TitleSections>Total</TitleSections>
         </CartTitle>
         {cartData}
       </ContainerDivider>
       <ContainerCartTotals>
-        <h1>Cart Totals</h1>
-        <h2>Total: $ {totalAmount}</h2>
+        <TitleSections>Cart Totals</TitleSections>
+        <h2>Total: $ {totalItemPrice}</h2>
         <h2>Total Quantity: {totalQuantity}</h2>
       </ContainerCartTotals>
     </Wrapper>

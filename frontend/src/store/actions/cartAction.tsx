@@ -1,3 +1,3 @@
 import { cartSlice } from "../reducer/cartSlice";
 
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, removeFromCart } = cartSlice.actions;

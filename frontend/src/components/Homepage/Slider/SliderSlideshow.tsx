@@ -16,11 +16,7 @@ const items = [
   <SliderComponents img={santa} data-value="3" alt="santa" />,
 ];
 
-interface ISliderSlidershowProps {}
-
-const SliderSlidershow: React.FunctionComponent<ISliderSlidershowProps> = (
-  props
-) => {
+const SliderSlidershow: React.FunctionComponent = () => {
   const renderDotsItem = ({ isActive }: { isActive: boolean }) => {
     return isActive ? (
       <SquareImgBool src={squareActive} alt="rectangle-slider-active" />

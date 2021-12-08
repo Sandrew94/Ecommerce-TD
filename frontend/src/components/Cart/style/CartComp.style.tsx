@@ -25,3 +25,9 @@ export const ContainerDivider = styled.div`
 export const ContainerCartTotals = styled.div`
   width: 25%;
 `;
+
+export const TitleSections = styled.h1`
+  color: #1d3178;
+  font-size: 2rem;
+  line-height: 2.3rem;
+`;

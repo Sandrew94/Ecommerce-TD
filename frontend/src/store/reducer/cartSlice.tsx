@@ -1,16 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { RootState } from "..";
 
 type initialStateType = {
-  // items: string[];
-  items: any;
+  items: newItemType;
   totalQuantity: number;
   totalAmount: number;
 };
 
 type newItemType = {
-  id: string;
+  _id: string;
   quantity: number;
-  totalAmount: number;
   name: string;
   price: number;
   totalPrice: number;
@@ -22,35 +21,18 @@ type SingleItemType = {} & newItemType[0];
 const initialState: initialStateType = {
   items: [],
   totalQuantity: 0,
-  totalAmount: 0,
+  totalAmount: 0, //selector??
 };
 
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    // addToCart: (state, action) => {
-    //   const { item } = action.payload;
-
-    //   const itemIndex = state.items.indexOf(item);
-
-    //   state.totalQuantity += 1;
-    //   if (itemIndex === -1) {
-    //     state.items.push({ item, quantity: 1 });
-    //     state.totalAmount += item.price;
-    //   } else {
-    //     console.log("ci entra");
-    //     state.totalQuantity += 1;
-    //     state.totalAmount += item.price;
-    //   }
-    // }, //NON AGGIUNGE ARRAY SIMILI
-
     addToCart: (state, action) => {
       const newItem = action.payload;
-      let arrTotalPrice: number[] = [];
 
       const existingItem = state.items.find(
-        (item: any) => item._id === newItem._id
+        (item: SingleItemType) => item._id === newItem._id
       );
 
       state.totalQuantity++;
@@ -67,15 +49,42 @@ export const cartSlice = createSlice({
         existingItem.quantity += 1;
         existingItem.totalPrice += newItem.price;
       }
+    },
+    removeFromCart: (state, action) => {
+      const _id = action.payload;
 
-      //Calculate the total amount
-      state.items.forEach((item: SingleItemType) => {
-        arrTotalPrice.push(item.totalPrice);
-      });
-
-      state.totalAmount = Math.trunc(
-        arrTotalPrice.reduce((sum: number, amount: number) => sum + amount)
+      const findItemExistence = state.items.find(
+        (item: SingleItemType) => item._id === _id
       );
+
+      if (findItemExistence !== undefined) {
+        state.totalQuantity--;
+        if (findItemExistence.quantity === 1) {
+          findItemExistence.totalPrice -= findItemExistence.price;
+
+          //Remove the card from the CartComponents
+          state.items = state.items.filter((item: any) => item._id !== _id);
+        } else {
+          findItemExistence.totalPrice -= findItemExistence.price;
+          findItemExistence.quantity--;
+        }
+      }
     },
   },
 });
+
+//Selector used to calculate the total amount
+
+export const getTotalAmount = (state: RootState): number | void => {
+  let arrTotalPrice: number[] = [];
+
+  if (state.cart.items.length === 0) return;
+
+  state.cart.items.forEach((item: SingleItemType) => {
+    arrTotalPrice.push(item.totalPrice);
+  });
+
+  return Math.trunc(
+    arrTotalPrice.reduce((sum: number, amount: number) => sum + amount)
+  );
+};

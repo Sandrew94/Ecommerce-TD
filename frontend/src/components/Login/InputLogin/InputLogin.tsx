@@ -54,7 +54,10 @@ const InputLogin: React.FunctionComponent<IInputLoginProps> = ({
 
       let url;
       if (isLogin) {
-        url = "http://localhost:5000/api/users/login";
+        //Sempre host in file .env
+
+        url = `http://localhost:5000/api/users/login`;
+        // url = `${process.env.API_HOST}api/users/login`;
       } else {
         url = `http://localhost:5000/api/users/register`;
       }
@@ -64,7 +67,8 @@ const InputLogin: React.FunctionComponent<IInputLoginProps> = ({
         console.log(data);
 
         dispatch(setLogin(data.token)); //Import token to redux
-        dispatch(logoutTimer(6000000));
+        dispatch(logoutTimer(6000000)); //da levare da fare scadenza jwt su server
+        //Fare logiche su redux
 
         navigate("/"); //Redirect to Homepage
       } catch (err) {
