@@ -1,28 +1,33 @@
 import * as React from "react";
-import test from "../assets/images/playstation.jpg";
+
 import { CartContainer, ProductImage } from "./style/CartItem.style";
 
-interface ICartItemProps {}
+interface ICartItemProps {
+  item: any;
+}
 
-const CartItem: React.FunctionComponent<ICartItemProps> = (props) => {
+const CartItem: React.FunctionComponent<ICartItemProps> = ({ item }) => {
+  const { name, image, price, quantity, totalPrice, brand } = item;
+
   return (
     <CartContainer>
       <div>
-        <ProductImage src={test} alt="demoImage" />
+        <span>{name}</span>
+        <ProductImage src={image} alt={brand} />
       </div>
       <div>
-        <h1>$100</h1>
+        <h1>$ {price}</h1>
       </div>
       <div>
         <div>
           <button>+</button>
-          <span>State</span>
+          <span>{quantity}</span>
           <button>-</button>
         </div>
       </div>
       <div>
         <div>
-          <h2>Price: $state</h2>
+          <h2> $ {Math.trunc(totalPrice)}</h2>
         </div>
       </div>
     </CartContainer>

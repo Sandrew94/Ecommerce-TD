@@ -6,10 +6,20 @@ import {
   Wrapper,
 } from "./style/CartComp.style";
 import CartItem from "./CartItem";
+import { useSelector } from "react-redux";
 
 interface ICartCompProps {}
 
 const CartComp: React.FunctionComponent<ICartCompProps> = (props) => {
+  const { items, totalAmount, totalQuantity } = useSelector(
+    (state: any) => state.cart
+  );
+
+  const cartData = items.map((item: any) => {
+    const { _id } = item;
+    return <CartItem key={_id} item={item} />;
+  });
+
   return (
     <Wrapper>
       <ContainerDivider>
@@ -19,11 +29,12 @@ const CartComp: React.FunctionComponent<ICartCompProps> = (props) => {
           <h1>Quantity</h1>
           <h1>Total</h1>
         </CartTitle>
-        <CartItem />
+        {cartData}
       </ContainerDivider>
       <ContainerCartTotals>
         <h1>Cart Totals</h1>
-        <h2>Total: state</h2>
+        <h2>Total: $ {totalAmount}</h2>
+        <h2>Total Quantity: {totalQuantity}</h2>
       </ContainerCartTotals>
     </Wrapper>
   );
