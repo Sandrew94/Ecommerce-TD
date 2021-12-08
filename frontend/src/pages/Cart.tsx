@@ -1,9 +1,8 @@
 import * as React from "react";
+import CartComp from "../components/Cart/CartComp";
 
-interface ICartProps {}
-
-const Cart: React.FunctionComponent<ICartProps> = (props) => {
-  return <h1>Cart</h1>;
+const Cart: React.FunctionComponent = () => {
+  return <CartComp />;
 };
 
 export default Cart;

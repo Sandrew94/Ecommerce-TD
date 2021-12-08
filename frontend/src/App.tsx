@@ -15,6 +15,7 @@ import Wishlist from "./pages/Wishlist";
 import { useDispatch } from "react-redux";
 import { isLogged } from "./store/actions/loginAction";
 import React from "react";
+import SingleProducts from "./pages/SingleProducts";
 
 function App() {
   //Check if the user is already logged in
@@ -44,14 +45,24 @@ function App() {
               </Layout>
             }
           />
-          <Route
-            path="/products"
-            element={
-              <Layout>
-                <Products />
-              </Layout>
-            }
-          />
+          <Route path="/products">
+            <Route
+              index
+              element={
+                <Layout>
+                  <Products />
+                </Layout>
+              }
+            />
+            <Route
+              path=":id"
+              element={
+                <Layout>
+                  <SingleProducts />
+                </Layout>
+              }
+            />
+          </Route>
           <Route
             path="/cart"
             element={
