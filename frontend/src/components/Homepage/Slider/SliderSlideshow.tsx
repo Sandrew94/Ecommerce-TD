@@ -1,11 +1,11 @@
 import * as React from "react";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
-import sofa from "../../../assets/images/sofa.png";
-import sofa_big from "../../../assets/images/sofa_big.png";
-import santa from "../../../assets/images/santa.png";
-import squareActive from "../../../assets/images/square_active.png";
-import squareDeactivated from "../../../assets/images/square_deactivated.png";
+import sofa from "../../../../public/images/sofa.png";
+import sofa_big from "../../../../public/images/sofa_big.png";
+import santa from "../../../../public/images/santa.png";
+import squareActive from "../../../../public/images/square_active.png";
+import squareDeactivated from "../../../../public/images/square_deactivated.png";
 import SliderComponents from "./SliderComponets";
 import { SquareImgBool } from "../style/SliderComponents";
 import "../style/styleDotsSlider.css";

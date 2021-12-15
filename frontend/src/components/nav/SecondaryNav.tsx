@@ -1,6 +1,7 @@
 import * as React from "react";
 import { WrapperPages, WrapperSecondaryNav } from "./style/Nav.style";
-import HektoLogo from "../../assets/images/HektoLogo.png";
+// import HektoLogo from "../../../../../public/images/HektoLogo.png";
+import HektoLogo from "../../../public/images/HektoLogo.png";
 import NavLinkComponents from "./NavLinkComponents";
 import { SpanWrapper } from "./style/SpanStyle.style";
 

@@ -1,7 +1,6 @@
 import * as React from "react";
 import { ProductsType, SingleProductsType } from "./Products.type";
 import { v4 as uuidv4 } from "uuid";
-import mouse from "../../../../assets/images/mouse.jpg";
 import {
   ImgProduct,
   TextActualPrice,
@@ -44,7 +43,7 @@ const Items: React.FunctionComponent<IItemsProps> = ({ products }) => {
         <IconsCarts handleAddToCart={handleAddToCart} />
 
         <ImgProduct
-          src={mouse}
+          src={`${image}`}
           alt={name}
           onClick={() => handleRedirectSingleProduct(_id)}
         />

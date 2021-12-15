@@ -10,7 +10,7 @@ import {
   TitleText,
   DescriptionText,
 } from "../style/SliderComponents";
-import lamp from "../../../assets/images/lampadario.png";
+import lamp from "../../../../public/images/lampadario.png";
 import { ButtonStyle } from "../../../styles-global/button";
 import { useNavigate } from "react-router-dom";
 

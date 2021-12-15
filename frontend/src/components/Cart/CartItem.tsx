@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
 import { addToCart, removeFromCart } from "../../store/actions/cartAction";
+import { SingleItemType } from "../../store/reducer/cartSlice";
 
 import {
   ButtonStyle,
@@ -13,7 +14,7 @@ import {
 } from "./style/CartItem.style";
 
 interface ICartItemProps {
-  item: any;
+  item: SingleItemType;
 }
 
 const CartItem: React.FunctionComponent<ICartItemProps> = ({ item }) => {
