@@ -8,20 +8,17 @@ import {
 } from "./style/CartComp.style";
 import CartItem from "./CartItem";
 import { useSelector } from "react-redux";
-import { getTotalAmount } from "../../store/reducer/cartSlice";
+import { getTotalAmount, SingleItemType } from "../../store/reducer/cartSlice";
 import { RootState } from "../../store";
 
-interface ICartCompProps {}
-
-const CartComp: React.FunctionComponent<ICartCompProps> = (props) => {
+const CartComp: React.FunctionComponent = () => {
   const { items, totalQuantity } = useSelector(
     (state: RootState) => state.cart
   );
 
   const totalItemPrice = useSelector(getTotalAmount);
-  // console.log(totalItemPrice, "data");
 
-  const cartData = items.map((item: any) => {
+  const cartData = items.map((item: SingleItemType) => {
     const { _id } = item;
     return <CartItem key={_id} item={item} />;
   });

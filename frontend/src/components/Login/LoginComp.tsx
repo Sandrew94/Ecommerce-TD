@@ -1,5 +1,5 @@
 import * as React from "react";
-import loginLogo from "../../assets/images/loginLogo.png";
+import loginLogo from "../../../public/images/loginLogo.png";
 
 import {
   ImgLogo,

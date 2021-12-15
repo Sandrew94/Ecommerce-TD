@@ -1,14 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "..";
 
-type initialStateType = {
+type reduceSum = (sum: number, amount: number) => number;
+
+export type initialStateType = {
   items: newItemType;
   totalQuantity: number;
   totalAmount: number;
 };
 
-type newItemType = {
+export type newItemType = {
   _id: string;
+  image: string;
   quantity: number;
   name: string;
   price: number;
@@ -16,12 +19,12 @@ type newItemType = {
   brand: string;
 }[];
 
-type SingleItemType = {} & newItemType[0];
+export type SingleItemType = {} & newItemType[0];
 
 const initialState: initialStateType = {
   items: [],
   totalQuantity: 0,
-  totalAmount: 0, //selector??
+  totalAmount: 0,
 };
 
 export const cartSlice = createSlice({
@@ -39,6 +42,7 @@ export const cartSlice = createSlice({
       if (!existingItem) {
         state.items.push({
           _id: newItem._id,
+          image: newItem.image,
           price: newItem.price,
           quantity: 1,
           totalPrice: newItem.price,
@@ -84,7 +88,7 @@ export const getTotalAmount = (state: RootState): number | void => {
     arrTotalPrice.push(item.totalPrice);
   });
 
-  return Math.trunc(
-    arrTotalPrice.reduce((sum: number, amount: number) => sum + amount)
-  );
+  const callBackSum: reduceSum = (sum, amount) => sum + amount;
+
+  return Math.trunc(arrTotalPrice.reduce(callBackSum));
 };

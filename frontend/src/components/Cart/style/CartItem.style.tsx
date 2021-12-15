@@ -4,18 +4,18 @@ export const CartContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr;
-  gap: 0px 0px;
   grid-template-areas: ". . . . ";
   border-bottom: 1px solid #000;
   width: 100%;
   justify-content: center;
   align-content: center;
   align-items: center;
+  padding: 1.5rem 1.5rem;
 `;
 
 export const ProductSection = styled.div`
   display: flex;
-  height: 5rem;
+  height: 7rem;
   align-items: center;
 `;
 
