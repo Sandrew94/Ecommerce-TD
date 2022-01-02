@@ -6,7 +6,6 @@ type reduceSum = (sum: number, amount: number) => number;
 export type initialStateType = {
   items: newItemType;
   totalQuantity: number;
-  totalAmount: number;
 };
 
 export type newItemType = {
@@ -24,7 +23,6 @@ export type SingleItemType = {} & newItemType[0];
 const initialState: initialStateType = {
   items: [],
   totalQuantity: 0,
-  totalAmount: 0,
 };
 
 export const cartSlice = createSlice({
@@ -67,12 +65,18 @@ export const cartSlice = createSlice({
           findItemExistence.totalPrice -= findItemExistence.price;
 
           //Remove the card from the CartComponents
-          state.items = state.items.filter((item: any) => item._id !== _id);
+          state.items = state.items.filter(
+            (item: SingleItemType) => item._id !== _id
+          );
         } else {
           findItemExistence.totalPrice -= findItemExistence.price;
           findItemExistence.quantity--;
         }
       }
+    },
+    saveCartLocalStorage: (state: any) => {
+      localStorage.setItem("cartState", JSON.stringify(state));
+      //https://stackoverflow.com/questions/68421040/local-storage-using-redux-toolkit
     },
   },
 });
