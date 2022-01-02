@@ -1,6 +1,10 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
-import { addToCart, removeFromCart } from "../../store/actions/cartAction";
+import {
+  addToCart,
+  removeFromCart,
+  saveCartLocalStorage,
+} from "../../store/actions/cartAction";
 import { SingleItemType } from "../../store/reducer/cartSlice";
 
 import {
@@ -23,10 +27,12 @@ const CartItem: React.FunctionComponent<ICartItemProps> = ({ item }) => {
 
   const handleRemoveItem = () => {
     dispatch(removeFromCart(_id));
+    dispatch(saveCartLocalStorage());
   };
 
   const handleAddItem = () => {
     dispatch(addToCart({ price, quantity, _id }));
+    dispatch(saveCartLocalStorage());
   };
 
   return (
